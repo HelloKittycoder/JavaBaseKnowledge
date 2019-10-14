@@ -5,6 +5,7 @@ import java.util.Iterator;
 /**
  * Created by shucheng on 2019-10-14 下午 18:00
  * 自定义一个可以使用增强for循环进行遍历的类
+ * https://blog.csdn.net/china_demon/article/details/53861813
  *
  * 要点：实现Iterable接口，在MyList内部返回一个Iterator实现
  */
