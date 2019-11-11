@@ -29,8 +29,11 @@ public class TestEx01 {
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(Config01.class);
         logger.debug("spring容器创建完成");
         People p = (People) ac.getBean("peo");
-        System.out.println(p);
+        logger.debug("获取peo "+ p);
         People p2 = (People) ac.getBean("zhangsan");
-        System.out.println(p2);
+        logger.debug("获取zhangsan " + p2);
+        Config01 config = ac.getBean("config01", Config01.class);
+        logger.debug("获取注入的属性：configId为" + config.getConfigId()
+                + "，configName为" + config.getConfigName());
     }
 }
