@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.kittycoder</groupId>
+    <artifactId>spring-framework</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <org.springframework.version>5.1.6.RELEASE</org.springframework.version>
+    </properties>
+
+    <parent>
+        <artifactId>JavaBaseKnowledge</artifactId>
+        <groupId>com.kittycoder</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <dependencies>
+        <!-- 如果是spring4的话，使用log4j就行 -->
+        <!-- 如果是spring5的话，要使用log4j2就行 -->
+        <!-- 参考链接：https://www.cnblogs.com/wudb/p/11511266.html -->
+        <!--<dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>-->
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.6.2</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+        <!-- 里面包含了beans，core，expression，aop -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+    </dependencies>
+</project>
