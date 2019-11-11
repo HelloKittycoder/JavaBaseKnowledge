@@ -14,8 +14,11 @@ public class TestEx02 {
 
     private static Logger logger = LogManager.getLogger(TestEx02.class);
 
-    // peo不是懒加载（在创建容器的时候已经把peo创建好了），
-    // zhangsan是懒加载（在创建容器的时候zhangsan还没有创建好，在调用getBean方法的时候才开始创建zhangsan）
+    /**
+     * spring里默认是主动加载
+     * peo不是懒加载（在创建容器的时候已经把peo创建好了），
+     * zhangsan是懒加载（在创建容器的时候zhangsan还没有创建好，在调用getBean方法的时候才开始创建zhangsan）
+     */
     @Test
     public void test1() {
         logger.debug("测试bean的懒加载");
