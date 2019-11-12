@@ -12,6 +12,16 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 /**
  * Created by shucheng on 2019-11-12 下午 17:49
+ *
+ * spring组件注册的方式：
+ * 1. xml加载
+ * 2. @Bean 加载第三方jar的类 创建SpringBoot-starter的方式
+ * 3. 包扫描（@ComponentScan）+标志注解（@Controller,@Service,@Repository,@Component）
+ * 4. @Import 快速给容器导入一个组件，容器会自动注册这个组件的bean
+ * 使用：（1）直接提供一个class
+ * （2）ImportSelector 是一个接口，返回需要导入到容器的组件的全类名数组
+ * （3）ImportBeanDefinitionRegistrar 可以手动添加组件到IoC容器，所有Bean的注册都可以使用BeanDefinitionRegistry
+ * 5. 使用FactoryBean（工厂bean）进行注册
  */
 public class TestEx05 {
 
