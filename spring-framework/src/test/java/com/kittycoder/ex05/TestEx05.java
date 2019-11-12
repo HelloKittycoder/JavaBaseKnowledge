@@ -3,6 +3,7 @@ package com.kittycoder.ex05;
 import com.kittycoder.ex05.bean.MyUtil;
 import com.kittycoder.ex05.bean.UserController;
 import com.kittycoder.ex05.config.Config05;
+import com.kittycoder.ex05.config.Config05_a;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
@@ -36,5 +37,23 @@ public class TestEx05 {
         MyUtil myUtil = ac.getBean("myUtil", MyUtil.class);
         logger.debug("获取注入的属性：id为" + myUtil.getId()
                 + "，name为" + myUtil.getName());
+    }
+
+    @Test
+    public void test2() {
+        logger.debug("测试@Import加载组件");
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(Config05_a.class);
+
+        String[] names = ac.getBeanDefinitionNames();
+        for (String name : names) {
+            System.out.println(name);
+        }
+
+        logger.debug("获取People");
+        logger.debug(ac.getBean("com.kittycoder.ex01.People"));
+        logger.debug("获取User01");
+        logger.debug(ac.getBean("com.kittycoder.ex05.bean.a.User01"));
+        logger.debug("获取User03");
+        logger.debug(ac.getBean("user03"));
     }
 }
