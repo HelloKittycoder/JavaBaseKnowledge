@@ -4,6 +4,7 @@ import com.kittycoder.ex05.bean.MyUtil;
 import com.kittycoder.ex05.bean.UserController;
 import com.kittycoder.ex05.config.Config05;
 import com.kittycoder.ex05.config.Config05_a;
+import com.kittycoder.ex05.config.Config05_b;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
@@ -55,5 +56,21 @@ public class TestEx05 {
         logger.debug(ac.getBean("com.kittycoder.ex05.bean.a.User01"));
         logger.debug("获取User03");
         logger.debug(ac.getBean("user03"));
+    }
+
+    @Test
+    public void test3() {
+        logger.debug("测试FactoryBean加载组件");
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(Config05_b.class);
+
+        String[] names = ac.getBeanDefinitionNames();
+        for (String name : names) {
+            System.out.println(name);
+        }
+
+        logger.debug("获取FactoryBean生成的对象");
+        logger.debug(ac.getBean("userFactoryBean"));
+        logger.debug("获取FactoryBean本身");
+        logger.debug(ac.getBean("&userFactoryBean"));
     }
 }
