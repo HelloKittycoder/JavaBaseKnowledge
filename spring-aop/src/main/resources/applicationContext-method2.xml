@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 参考文档：https://docs.spring.io/spring/docs/4.1.6.RELEASE/spring-framework-reference/htmlsingle/#aop-api-advice-types -->
+    <!-- 需要增加切入逻辑的类 -->
+    <bean id="demo" class="com.kittycoder.interceptMethod.Demo"></bean>
+    <!-- 切面类 -->
+    <bean id="myBeforeAdvice" class="com.kittycoder.method2.advice.MyBeforeAdvice"></bean>
+    <bean id="myAfterReturningAdvice" class="com.kittycoder.method2.advice.MyAfterReturningAdvice"></bean>
+    <bean id="myAroundAdvice" class="com.kittycoder.method2.advice.MyAroundAdvice"></bean>
+    <bean id="myThrowsAdvice" class="com.kittycoder.method2.advice.MyThrowsAdvice"></bean>
+
+    <!-- 前置通知 -->
+    <aop:config>
+        <aop:pointcut id="beforeBusinessService" expression="execution(* com.kittycoder.interceptMethod.Demo.method_a())"/>
+        <aop:advisor advice-ref="myBeforeAdvice" pointcut-ref="beforeBusinessService"/>
+    </aop:config>
+
+    <aop:config>
+        <aop:pointcut id="beforeBusinessService2" expression="execution(* com.kittycoder.interceptMethod.Demo.method_a2(String))"/>
+        <aop:advisor advice-ref="myBeforeAdvice" pointcut-ref="beforeBusinessService2"/>
+    </aop:config>
+
+    <!-- 后置返回通知 -->
+    <aop:config>
+        <aop:pointcut id="afterBusinessService2" expression="execution(* com.kittycoder.interceptMethod.Demo.method_b2())"/>
+        <aop:advisor advice-ref="myAfterReturningAdvice" pointcut-ref="afterBusinessService2"/>
+    </aop:config>
+
+    <!-- 环绕通知 -->
+    <aop:config>
+        <aop:pointcut id="aroundBusinessService" expression="execution(* com.kittycoder.interceptMethod.Demo.method_c())"/>
+        <aop:advisor advice-ref="myAroundAdvice" pointcut-ref="aroundBusinessService"/>
+    </aop:config>
+
+    <!-- 异常通知 -->
+    <aop:config>
+        <aop:pointcut id="exceptionAspect" expression="execution(* com.kittycoder.interceptMethod.Demo.method_d())"/>
+        <aop:advisor advice-ref="myThrowsAdvice" pointcut-ref="exceptionAspect"/>
+    </aop:config>
+</beans>

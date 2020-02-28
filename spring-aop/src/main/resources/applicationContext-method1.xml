@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+
+    <!-- 参考文档：https://docs.spring.io/spring/docs/4.1.6.RELEASE/spring-framework-reference/htmlsingle/#aop -->
+    <!-- 需要增加切入逻辑的类 -->
+    <bean id="demo" class="com.kittycoder.interceptMethod.Demo"></bean>
+    <!-- 切面类 -->
+    <bean id="myAdvice" class="com.kittycoder.method1.advice.MyAdvice"></bean>
+
+    <aop:config>
+        <!-- 前置通知 -->
+        <aop:aspect id="myAspect" ref="myAdvice">
+            <!-- 这里并没有直接写表达式，而是写一个方法，引用该方法上的表达式 -->
+            <aop:pointcut id="beforeBusinessService" expression="com.kittycoder.method1.advice.MyAdvice.beforeTest()"/>
+            <aop:before pointcut-ref="beforeBusinessService" method="beforeTest"/>
+        </aop:aspect>
+
+        <aop:aspect id="beforeAspect2" ref="myAdvice">
+            <aop:pointcut id="beforeBusinessService2" expression="execution(* com.kittycoder.interceptMethod.Demo.method_a2(String)) and args(name)"/>
+            <aop:before pointcut-ref="beforeBusinessService2" method="beforeTest2"/>
+        </aop:aspect>
+
+        <!-- 后置通知 -->
+        <aop:aspect id="afterAspect" ref="myAdvice">
+            <aop:pointcut id="afterBusinessService" expression="execution(* com.kittycoder.interceptMethod.Demo.method_b())"/>
+            <aop:after pointcut-ref="afterBusinessService" method="afterTest"/>
+        </aop:aspect>
+
+        <!-- 后置返回通知 -->
+        <aop:aspect id="afterReturningAspect" ref="myAdvice">
+            <aop:pointcut id="afterBusinessService2" expression="execution(* com.kittycoder.interceptMethod.Demo.method_b2())"/>
+            <aop:after-returning pointcut-ref="afterBusinessService2" method="afterReturningTest" returning="retVal"/>
+        </aop:aspect>
+
+        <!-- 环绕通知 -->
+        <aop:aspect id="aroundAspect" ref="myAdvice">
+            <!--<aop:pointcut id="aroundBusinessService" expression="execution(* com.kittycoder.interceptMethod.Demo.method_c())"/>
+            <aop:around pointcut-ref="aroundBusinessService" method="aroundTest"/>-->
+            <aop:around method="aroundTest" pointcut="execution(* com.kittycoder.interceptMethod.Demo.method_c())"/>
+        </aop:aspect>
+
+        <aop:aspect id="aroundAspect2" ref="myAdvice">
+            <aop:around method="aroundTest2" pointcut="execution(* com.kittycoder.interceptMethod.Demo.method_c2(String)) and args(name)"/>
+        </aop:aspect>
+
+        <!-- 异常通知 -->
+        <aop:aspect id="exceptionAspect" ref="myAdvice">
+            <aop:pointcut id="exceptionBusinessService" expression="execution(* com.kittycoder.interceptMethod.Demo.method_d())"/>
+            <aop:after-throwing pointcut-ref="exceptionBusinessService" method="exceptionTest" throwing="ex"/>
+        </aop:aspect>
+    </aop:config>
+</beans>

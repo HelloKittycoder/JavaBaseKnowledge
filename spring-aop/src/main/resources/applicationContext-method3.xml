@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 参考文档：https://docs.spring.io/spring/docs/4.1.6.RELEASE/spring-framework-reference/htmlsingle/#aop-ataspectj -->
+    <!-- 完全使用AspectJ注解 -->
+
+    <!-- 启用AspectJ支持 -->
+    <aop:aspectj-autoproxy/>
+    <!-- 需要增加切入逻辑的类 -->
+    <bean id="demo3" class="com.kittycoder.interceptMethod.Demo3"></bean>
+    <bean id="myAspectAdvice" class="com.kittycoder.method3.advice.MyAspectAdvice"></bean>
+</beans>
